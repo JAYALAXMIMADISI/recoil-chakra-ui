@@ -12,7 +12,7 @@ import {
   } from '@chakra-ui/react';
   import { useEffect, useRef } from 'react';
   import { atom, useRecoilState, useSetRecoilState } from 'recoil';
-  import { usersListStateAtom } from './users-panel';
+  import { usersListStateAtom } from '../components/atoms-selectors';
   
   const inputFieldValue = atom({
     key: 'inputFieldValue',
@@ -27,7 +27,7 @@ import {
     const inputRef:any = useRef(null);
   
     useEffect(() => {
-      inputRef.current?.focus();
+      inputRef.current?.focus();  
     }, []);
   
     const addNewUser = () => {
@@ -64,7 +64,7 @@ import {
             <ModalBody>
               <Input
                 type="text"
-                value={value}
+                value={value} 
                 onChange={handleOnChange}
                 ref={inputRef}
               />

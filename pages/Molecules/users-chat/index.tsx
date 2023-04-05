@@ -1,17 +1,17 @@
-import { Box, Grid } from '@chakra-ui/react';
+import { Box, Grid, VStack } from '@chakra-ui/react';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 import {
   userMessagesListByUserIdSelector,
   userMessagesListId,
-} from '../users-panel';
+} from '../../components/atoms-selectors';
 import { BiUser } from 'react-icons/bi';
 
 export default function UsersChat() {
   const id = useRecoilValue(userMessagesListId);
   const userMessages = useRecoilValue(userMessagesListByUserIdSelector(id));
   return (
-    <Box overflow="scroll">
+    <VStack overflow="scroll" align='left'>
       {userMessages[0]?.messages?.map((item:any) => {
         return (
           <Grid
@@ -27,6 +27,6 @@ export default function UsersChat() {
           </Grid>
         );
       })}
-    </Box>
+    </VStack>
   );
 }
