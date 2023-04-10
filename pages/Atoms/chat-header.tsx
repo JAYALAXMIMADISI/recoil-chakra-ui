@@ -1,5 +1,6 @@
-import { Box, Center, extendTheme } from '@chakra-ui/react';
+import { Box, Button, Center, extendTheme } from '@chakra-ui/react';
 import React from 'react';
+import {IoMdCloseCircle} from 'react-icons/io'
 
 
 export default function ChatHeader() {

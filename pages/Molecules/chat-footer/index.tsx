@@ -20,6 +20,7 @@ import {
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import isValidHTMLProp from "@emotion/is-prop-valid";
 import { shouldForwardProp } from "@chakra-ui/react";
+import { listItem } from "nxt/interfaces";
 
 const Div = chakra("div", {
   shouldForwardProp: (prop: any) => {
@@ -56,7 +57,7 @@ export default function ChatFooter() {
 
   const addUsersNewMessage = () => {
     const userUpdatedList = JSON.parse(JSON.stringify(list));
-    const userUpdatedMessages = userUpdatedList.map((item: any) => {
+    const userUpdatedMessages = userUpdatedList.map((item: listItem) => {
       if (item.id == id) {
         item.messages = [...item.messages, inputValue];
         return item;
@@ -72,7 +73,7 @@ export default function ChatFooter() {
   return (
     <Div>
       <Box mt={10} display="flex">
-        <Input type="text" onChange={handleOnChange} value={inputValue} />
+        <Input type="text" onChange={handleOnChange} value={inputValue} placeholder='Enter Message' />
         <ButtonSend
           onClick={addUsersNewMessage}
           ml={2}

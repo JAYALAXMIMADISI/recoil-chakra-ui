@@ -1,5 +1,6 @@
 import {
     Button,
+    Grid,
     Input,
     Modal,
     ModalBody,
@@ -13,6 +14,7 @@ import {
   import { useEffect, useRef } from 'react';
   import { atom, useRecoilState, useSetRecoilState } from 'recoil';
   import { usersListStateAtom } from '../components/atoms-selectors';
+import CloseChat from './close-button-alert';
   
   const inputFieldValue = atom({
     key: 'inputFieldValue',
@@ -34,7 +36,7 @@ import {
       setUsersUpdatedList((list:any) => [
         ...list,
         {
-          id: new Date(),
+          id: list.length+1,
           name: value,
           messages: [],
         },
@@ -48,7 +50,7 @@ import {
   
     return (
       <>
-        <Button onClick={onOpen} m={2}>
+        <Button onClick={onOpen} ml='35%'>
           Add New User
         </Button>
         <Modal
