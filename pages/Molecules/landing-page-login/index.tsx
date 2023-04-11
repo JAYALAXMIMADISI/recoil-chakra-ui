@@ -1,7 +1,24 @@
-import { Button, Grid, Input } from "@chakra-ui/react";
+import { Grid, Input } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { RecoilRoot } from "recoil";
+import { m } from "framer-motion";
+
+const variants = {
+  hidden: {
+    y: -100,
+  },
+  visible: {
+    size: "sm",
+    width: "max-content",
+    marginLeft: "15%",
+    marginTop: "20px",
+    y: 0,
+    backgroundColor: "#fff",
+    padding: 3,
+    borderRadius: "5px",
+  },
+};
 
 export default function Login() {
   const router = useRouter();
@@ -14,7 +31,7 @@ export default function Login() {
   }, []);
 
   const handleChange = (event: any) => {
-    setChangePinValue(event.target.value);
+    if (event.target.value.length === 4) setChangePinValue(event.target.value);
   };
   return (
     <RecoilRoot>
@@ -32,22 +49,20 @@ export default function Login() {
             <Input
               type="text"
               w={{ base: "50%" }}
-              placeholder="Enter pin"
+              placeholder="Enter 4 digit pin"
               bg="#fff"
               onChange={handleChange}
             />
 
             {changePinValue && (
-              <Button
-                variant="outline"
-                size="sm"
-                w="max-content"
-                ml="13%"
-                mt="20px"
+              <m.button
+                variants={variants}
+                initial="hidden"
+                animate="visible"
                 onClick={() => router.push("../../Organisms/users-chat-area")}
               >
                 Open Chat
-              </Button>
+              </m.button>
             )}
           </>
         </Grid>

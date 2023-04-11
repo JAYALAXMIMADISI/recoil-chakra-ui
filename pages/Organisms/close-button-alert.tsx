@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
+import { motion } from "framer-motion";
 
 export default function CloseChat() {
   const router = useRouter();
@@ -18,9 +19,15 @@ export default function CloseChat() {
 
   return (
     <>
-      <Button colorScheme="red" onClick={onOpen}>
-        Close Chat
-      </Button>
+      <motion.button
+        initial={{ x: -200 }}
+        animate={{ x: 8 }}
+        transition={{ type: "tween" }}
+      >
+        <Button colorScheme="red" onClick={onOpen}>
+          Close Chat
+        </Button>
+      </motion.button>
 
       <AlertDialog
         isOpen={isOpen}

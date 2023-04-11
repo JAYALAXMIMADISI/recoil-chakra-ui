@@ -4,10 +4,11 @@ import { RecoilRoot } from "recoil";
 import { ErrorBoundary } from "react-error-boundary";
 import React, { useEffect, useState } from "react";
 import LandingPage from "./Organisms/landing-page";
+import { LazyMotion, domAnimation } from "framer-motion";
 
 export const theme = extendTheme({
   colors: {
-    primary: "teal", 
+    primary: "teal",
     secondary: "blue",
   },
   variants: {
@@ -25,27 +26,29 @@ export default function Home() {
   }, []);
 
   return (
-    <RecoilRoot>
-      <React.Suspense fallback={<div>Loading...</div>}>
-        <ErrorBoundary
-          fallbackRender={({ error }) => (
-            <div>
-              {`Errors that appear here are errors that happen at render: ${error.message}`}
-            </div>
-          )}
-        >
-          <ChakraProvider theme={theme}>
-            <Head>
-              <title>Create Next App</title>
-            </Head>
-            {mounted && (
-              <>
-                <LandingPage />
-              </>
+    <LazyMotion features={domAnimation} strict>
+      <RecoilRoot>
+        <React.Suspense fallback={<div>Loading...</div>}>
+          <ErrorBoundary
+            fallbackRender={({ error }) => (
+              <div>
+                {`Errors that appear here are errors that happen at render: ${error.message}`}
+              </div>
             )}
-          </ChakraProvider>
-        </ErrorBoundary>
-      </React.Suspense>
-    </RecoilRoot>
+          >
+            <ChakraProvider theme={theme}>
+              <Head>
+                <title>Create Next App</title>
+              </Head>
+              {mounted && (
+                <>
+                  <LandingPage />
+                </>
+              )}
+            </ChakraProvider>
+          </ErrorBoundary>
+        </React.Suspense>
+      </RecoilRoot>
+    </LazyMotion>
   );
 }
