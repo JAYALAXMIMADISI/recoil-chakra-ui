@@ -7,12 +7,19 @@ import ChatFooter from "../../Molecules/chat-footer";
 import UsersChat from "../../Molecules/users-chat";
 import UsersPanel from "../users-panel";
 import { theme } from "nxt/pages";
+import { useRouter } from "next/router";
 
 export default function OpenUsersChatOnLogin() {
+  const router = useRouter();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    if (localStorage.getItem("chatLogin") != "") {
+      router.push("../../Organisms/users-chat-area");
+    } else {
+      router.push("/");
+    }
   }, []);
   return (
     <>
@@ -28,28 +35,29 @@ export default function OpenUsersChatOnLogin() {
             >
               {mounted && (
                 <>
-                <Grid display="flex" h="100vh">
-                  <Box
-                    width={{ base: "100%", sm: "40%", md: "30%" }}
-                    h="100vh"
-                    m={2}
-                    overflow="scroll"
-                  >
-                    <UsersPanel />
-                  </Box>
-                  <Box w={{ base: "100%", sm: "60%", md: "70%" }} m={2}>
+                  <Grid display="flex" h="100vh">
                     <Box
-                      h={{ base: "100%", sm: "90%", md: "85%", lg: "90%" }}
+                      width={{ base: "100%", sm: "40%", md: "30%" }}
+                      h="100vh"
+                      m={2}
                       overflow="scroll"
                     >
-                      <ChatHeader />
-                      <UsersChat />
+                      <UsersPanel />
                     </Box>
-                    <Box h="10%">
-                      <ChatFooter />
+                    <Box w={{ base: "100%", sm: "60%", md: "70%" }} m={2}>
+                      <Box
+                        h={{ base: "100%", sm: "90%", md: "85%", lg: "90%" }}
+                        overflow="scroll"
+                      >
+                        <ChatHeader />
+                        <UsersChat />
+                      </Box>
+                      <Box h="10%">
+                        <ChatFooter />
+                      </Box>
                     </Box>
-                  </Box>
-                </Grid></>
+                  </Grid>
+                </>
               )}
             </ErrorBoundary>
           </React.Suspense>

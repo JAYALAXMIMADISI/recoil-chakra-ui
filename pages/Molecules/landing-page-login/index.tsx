@@ -30,6 +30,11 @@ export default function Login() {
     setMounted(true);
   }, []);
 
+  const openHomePage = () => {
+    localStorage.setItem("chatLogin", "token");
+    router.push("../../Organisms/users-chat-area");
+  };
+
   const handleChange = (event: any) => {
     if (event.target.value.length === 4) setChangePinValue(event.target.value);
   };
@@ -59,7 +64,8 @@ export default function Login() {
                 variants={variants}
                 initial="hidden"
                 animate="visible"
-                onClick={() => router.push("../../Organisms/users-chat-area")}
+                // onClick={() => router.push("../../Organisms/users-chat-area")}
+                onClick={openHomePage}
               >
                 Open Chat
               </m.button>

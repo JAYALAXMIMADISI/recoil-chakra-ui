@@ -17,6 +17,11 @@ export default function CloseChat() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef: any = React.useRef();
 
+  const removeLoginToken = () => {
+    localStorage.setItem("chatLogin", "");
+    router.push("/");
+  };
+
   return (
     <>
       <motion.button
@@ -48,7 +53,7 @@ export default function CloseChat() {
               <Button ref={cancelRef} onClick={onClose}>
                 Cancel
               </Button>
-              <Button colorScheme="red" onClick={() => router.push("/")} ml={3}>
+              <Button colorScheme="red" onClick={removeLoginToken} ml={3}>
                 Close
               </Button>
             </AlertDialogFooter>
